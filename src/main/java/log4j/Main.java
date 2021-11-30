@@ -1,6 +1,7 @@
 package log4j;
 
 import java.time.Clock;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,12 +9,12 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.message.Message;
-import desafioPaises.Paises;
+import paisesDesafio.Paises;
 
 public class Main {
     public static void main(String[] args) {
         Clock baseClock = Clock.systemUTC();
-        Paises nuevoPais = new Paises();
+        Paises nuevoPais = new Paises(1, "groenlandia", 55);
 
         System.out.println("El codigo inicia a las "+baseClock.instant());
         // Paises argentina = new Argentina(1, "Argentina", 100);
@@ -50,7 +51,7 @@ public class Main {
         
         Integer i = 0;
         for (String string : lista) {
-            paises.add(new Pais(i, lista[i], 100+i));
+            paises.add(new Paises(i, lista[i], 100+i));
             i++;
         }
         System.out.println(paises);
@@ -58,17 +59,17 @@ public class Main {
         System.out.println(paises.size());
         
         
-        List<Integer> codigoDePaises = paises.stream().map(pais -> pais.getCodigo()).collect(Collectors.toList());
+        List<Integer> codigoDePaises = paises.stream().map(pais -> pais.getCodigoArea()).collect(Collectors.toList());
         System.out.println("- "+ codigoDePaises);
         
-        Paises paisCodigo = paises.stream().filter(pais -> pais.getCodigo() == 105).findFirst().orElse(null);
-        List<Paises> paisesCodigo = paises.stream().filter(pais -> pais.getCodigo() > 105).collect(Collectors.toList());
+        Paises paisCodigo = paises.stream().filter(pais -> pais.getCodigoArea() == 105).findFirst().orElse(null);
+        List<Paises> paisesCodigo = paises.stream().filter(pais -> pais.getCodigoArea() > 105).collect(Collectors.toList());
         
         try {
         	mensaje1.logMessagesInformativo("Intentando generar los codigos");
         	Integer index = 0;
             for (String string : lista) {
-                paises.add(new Pais(index, lista[index], 100+index));
+                paises.add(new Paises(index, lista[index], 100+index));
                 index++;
             }   
         }
